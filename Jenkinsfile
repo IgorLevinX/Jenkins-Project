@@ -35,7 +35,7 @@ pipeline {
                 parallel (
                     'Message': {
                         sh 'echo "Running All scripts"'
-                    }
+                    },
                     'Bash': {
                         sh 'bash bash_script.sh'
                     },
