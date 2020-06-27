@@ -12,11 +12,13 @@ pipeline {
     
     stages {
         stage ('Configure') {
-            sh '''
-                chmod +x bash_script.sh
-                gcc c_script.c -o c_script
-                chmod +x c_script
-            '''
+            steps {
+                sh '''
+                    chmod +x bash_script.sh
+                    gcc c_script.c -o c_script
+                    chmod +x c_script
+                '''
+            }
         }
         stage ('All') {
             when {
