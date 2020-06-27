@@ -19,7 +19,7 @@ pipeline {
                     chmod +x c_script
                 '''
                 script {
-                    if (!fileExist('/logs/log.txt')) {
+                    if (!fileExists('/logs/log.txt')) {
                         dir ('logs') {
                             writeFile file: 'log.txt', text: ''
                         }
