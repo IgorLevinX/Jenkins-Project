@@ -18,6 +18,14 @@ pipeline {
                     gcc c_script.c -o c_script
                     chmod +x c_script
                 '''
+                script {
+                    if (!fileExist('/logs/log.txt')) {
+                    dir ('logs') {
+                        writeFile file: 'log.txt', text: ''
+                }
+            }
+        }
+                }
             }
         }
         stage ('All') {
@@ -65,13 +73,6 @@ pipeline {
     }
     
     post {
-        always {
-            if (!fileExist('/logs/log.txt')) {
-                    dir ('logs') {
-                    writeFile file: 'log.txt', text: ''
-                }
-            }
-        }
         success {
             dir ('logs') {
                 writeFile file: 'log.txt', text: "${readFile 'log.txt'} \n${INFO}, completed successfully with ${params.Languages} option on ${DATE}"
