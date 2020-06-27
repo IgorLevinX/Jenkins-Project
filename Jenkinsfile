@@ -65,9 +65,16 @@ pipeline {
     }
     
     post {
+        always {
+            if (!fileExist('/logs/log.txt')) {
+                    dir ('logs') {
+                    writeFile file: 'log.txt', text: ''
+                }
+            }
+        }
         success {
             dir ('logs') {
-                writeFile file: 'log.txt', text: "${readFile 'log.txt'} \n${INFO}, completed successfully on ${DATE}"
+                writeFile file: 'log.txt', text: "${readFile 'log.txt'} \n${INFO}, completed successfully with ${params.Languages} option on ${DATE}"
             }
         }
         failure {
