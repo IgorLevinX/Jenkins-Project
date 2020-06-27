@@ -1,16 +1,22 @@
+// Jenkins pipeline for prinitng Hello World in different langueges (Bash, Python, C or all of them).
+// After the first build completes a refersh or reload of the jenkins page is needed.
 pipeline {
     agent any
     
+    // Choice parameters for the job to build in different languages
     parameters {
         choice(name: 'Languages', choices: ['All', 'Bash', 'Python', 'C'], description: 'Choose a programming language:')
     }
     
+    // Enviroment varaibles to use in all of the job scopes
     environment {
         DATE = sh(script: "date '+%d/%m/%Y %T'", returnStdout: true).trim()
         INFO = "Job: ${JOB_NAME} Build: ${BUILD_NUMBER}"
     }
     
+    // The main stages of the job
     stages {
+        // The first configuration stage to build the prerequisites for the scripts and logs. 
         stage ('Configure') {
             steps {
                 sh '''
@@ -27,6 +33,7 @@ pipeline {
                 }
             }
         }
+        // Choosing the 'All' option to run the scripts of Bash, Pythin and C in parallel
         stage ('All') {
             when {
                 expression { params.Languages == 'All' }
@@ -48,6 +55,7 @@ pipeline {
                 )
             }
         }
+        // Choosing the 'Bash' option to run Bash script
         stage ('Bash') {
             when {
                 expression { params.Languages == 'Bash' }
@@ -57,6 +65,7 @@ pipeline {
                 sh 'bash bash_script.sh'
             }
         }
+        // Choosing the 'Python' option to run Python script
         stage ('Python') {
             when {
                 expression { params.Languages == 'Python' }
@@ -66,6 +75,7 @@ pipeline {
                 sh 'python python_script.py'
             }
         }
+        // Choosing the 'C' option to run C script
         stage ('C') {
             when {
                 expression { params.Languages == 'C' }
@@ -77,6 +87,7 @@ pipeline {
         }
     }
     
+    // Logging the state of the build job to a log file
     post {
         success {
             dir ('logs') {
