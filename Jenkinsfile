@@ -32,8 +32,10 @@ pipeline {
                 expression { params.Languages == 'All' }
             }
             steps {
-                sh 'echo "Running All scripts"'
                 parallel (
+                    'Message': {
+                        sh 'echo "Running All scripts"'
+                    }
                     'Bash': {
                         sh 'bash bash_script.sh'
                     },
