@@ -20,11 +20,10 @@ pipeline {
                 '''
                 script {
                     if (!fileExist('/logs/log.txt')) {
-                    dir ('logs') {
-                        writeFile file: 'log.txt', text: ''
-                }
-            }
-        }
+                        dir ('logs') {
+                            writeFile file: 'log.txt', text: ''
+                        }
+                    }
                 }
             }
         }
