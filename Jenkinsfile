@@ -25,13 +25,13 @@ pipeline {
             steps {
                 parallel (
                     'Bash': {
-                        sh "echo ${params.Languages} 1"
+                        sh 'bash bash_script.sh'
                     },
                     'Python': {
-                        sh "echo ${params.Languages} 2"
+                        sh 'python python_script.py'
                     },
                     'C': {
-                        sh "echo ${params.Languages} 3"
+                        sh './c_script'
                     }
                 )
             }
@@ -41,7 +41,7 @@ pipeline {
                 expression { params.Languages == 'Bash' }
             }
             steps {
-                sh "echo ${params.Languages}"
+                sh 'bash bash_script.sh'
             }
         }
         stage ('Python') {
@@ -49,7 +49,7 @@ pipeline {
                 expression { params.Languages == 'Python' }
             }
             steps {
-                sh "echo ${params.Languages}"
+                sh 'python python_script.py'
             }
         }
         stage ('C') {
@@ -57,7 +57,7 @@ pipeline {
                 expression { params.Languages == 'C' }
             }
             steps {
-                sh "echo ${params.Languages} ${DATE}"
+                sh './c_script'
             }
         }
     }
