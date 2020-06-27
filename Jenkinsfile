@@ -33,6 +33,7 @@ pipeline {
                 expression { params.Languages == 'All' }
             }
             steps {
+                sh 'echo "Running All scripts"'
                 parallel (
                     'Bash': {
                         sh 'bash bash_script.sh'
@@ -51,6 +52,7 @@ pipeline {
                 expression { params.Languages == 'Bash' }
             }
             steps {
+                sh 'echo "Running Bash script"'
                 sh 'bash bash_script.sh'
             }
         }
@@ -59,6 +61,7 @@ pipeline {
                 expression { params.Languages == 'Python' }
             }
             steps {
+                sh 'echo "Running Python script"'
                 sh 'python python_script.py'
             }
         }
@@ -67,6 +70,7 @@ pipeline {
                 expression { params.Languages == 'C' }
             }
             steps {
+                sh 'echo "Running C script"'
                 sh './c_script'
             }
         }
