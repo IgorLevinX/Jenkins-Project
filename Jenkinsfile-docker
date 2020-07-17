@@ -15,7 +15,8 @@ pipeline {
 	  stage('Prepare sources of the website') {
          steps {
 	 sh '''
-        cd docker
+            mkdir docker
+            cd docker
 	    echo "Input param ${NAME}"		
 	    echo "<p>Hello from ${NAME}!</p>" >> index.html
 	 '''
