@@ -1,4 +1,4 @@
 *.c linguist-language=false
 *.sh linguist-language=false
 *.py linguist-language=false
-Jenkinsfile.* linguist-language=Groovy
+* linguist-language=Groovy
