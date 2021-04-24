@@ -1,1 +1,1 @@
-*.groovy linguist-language=Groovy
+*.c linguist-language=false
